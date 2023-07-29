@@ -1,0 +1,24 @@
+{
+    "properties": [
+        {
+            "name": "auth.key",
+            "type": "java.lang.String",
+            "description": "A description for 'auth.key'"
+        },
+        {
+            "name": "redirect.cancel",
+            "type": "java.lang.String",
+            "description": "A description for 'redirect.cancel'"
+        },
+        {
+            "name": "redirect.confirm",
+            "type": "java.lang.String",
+            "description": "A description for 'redirect.confirm'"
+        },
+        {
+            "name": "create.order",
+            "type": "java.lang.String",
+            "description": "A description for 'create.order'"
+        }
+    ]
+}

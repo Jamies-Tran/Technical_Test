@@ -20,3 +20,6 @@ Run Application:
     + Press F5 to run on debug mode
     + Press play button on project name in Spring Boot Dashboard tab
     + Right click on file AssignmentApplication.class and choose "run java"
+      
+After running the application, start project by enter url to browser:
+ - http://localhost:8080/

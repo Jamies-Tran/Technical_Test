@@ -27,6 +27,7 @@ public class OrderController {
     private OrderService orderService;
 
     @GetMapping("/order")
+    @SuppressWarnings("unchecked")
     public String redirectOrder(Model model, HttpSession session, @ModelAttribute Shipping shipping) {
 
         Item item = (Item) session.getAttribute("item");

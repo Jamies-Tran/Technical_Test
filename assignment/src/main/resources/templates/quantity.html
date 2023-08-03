@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantity</title>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Price(EUR)</th>
+            <th>Category</th>
+            <th>Quantity</th>
+        </tr>
+        <tr>
+            <form th:action="@{/specify-quantity/{itemName} (itemName = ${item.name})}" th:object="${itemQuantity}"
+                method="post">
+                <td th:text="${item.name}"></td>
+                <td th:text="${item.price.amount}"></td>
+                <td th:text="${item.category}"></td>
+                <td><input type="number" th:field="*{quantity}"></td>
+                <td><input type="submit" th:value="Next"></td>
+            </form>
+        </tr>
+    </table>
+</body>
+
+</html>

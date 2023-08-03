@@ -1,13 +1,25 @@
 package com.example.assignment.Services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.servlet.mvc.method.annotation.RequestBodyAdvice;
 
+import com.example.assignment.Dtos.Item;
+import com.example.assignment.Dtos.Merchant;
 import com.example.assignment.Dtos.OrderRequest;
 import com.example.assignment.Dtos.OrderResponse;
+import com.example.assignment.Dtos.TotalAmount;
 import com.example.assignment.Util.RestTemplateUtil;
 
 @Component
@@ -28,18 +40,43 @@ public class OrderService {
     @Value("${redirect.confirm}")
     private String REDIRECT_CONFIRM;
 
+    public TotalAmount createTotalAmount(List<Item> items) {
+        TotalAmount totalAmount = new TotalAmount();
+        int totalPrice = 0;
+        List<String> currencries = new ArrayList<>();
+        for (Item item : items) {
+            currencries.add(item.getPrice().getCurrency());
+            int itemPrice = Integer.parseInt(item.getPrice().getAmount());
+            itemPrice *= item.getQuantity();
+            totalPrice += itemPrice;
+        }
+        String getCurrency = currencries.stream().findFirst().get();
+        totalAmount.setAmount(String.valueOf(totalPrice));
+        totalAmount.setCurrency(getCurrency);
+
+        return totalAmount;
+    }
+
     public OrderResponse createOrder(OrderRequest orderRequest) {
-        OrderResponse orderResponse = null;
-        orderRequest.getMerchant().setRedirectCancelUrl(REDIRECT_CANCLE);
-        orderRequest.getMerchant().setRedirectConfirmUrl(REDIRECT_CONFIRM);
-        HttpHeaders headers = new HttpHeaders();
+        ResponseEntity<OrderResponse> orderResponse = null;
+        Merchant merchant = new Merchant(REDIRECT_CANCLE, REDIRECT_CONFIRM);
+        orderRequest.setMerchant(merchant);
 
-        headers.setContentType(MediaType.APPLICATION_JSON);
+        // HttpHeaders headers = new HttpHeaders();
+
+        // headers.setContentType(MediaType.APPLICATION_JSON);
+        // headers.add("Authorization", "Bearer " + AUTH_KEY);
+        // headers.add("accept", "application/json");
+        MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
+        headers.add("accept", "application/json");
+        headers.add("content-type", "application/json");
         headers.add("Authorization", "Bearer " + AUTH_KEY);
-        orderResponse = restTemplateUtil.createRestTemplate().postForObject(CREATE_ORDER, orderRequest,
-                OrderResponse.class, headers);
+        HttpEntity<OrderRequest> request = new HttpEntity<OrderRequest>(orderRequest,
+                headers);
+        orderResponse = restTemplateUtil.createRestTemplate().postForEntity(CREATE_ORDER, request,
+                OrderResponse.class);
 
-        return orderResponse;
+        return orderResponse.getBody();
     }
 
 }

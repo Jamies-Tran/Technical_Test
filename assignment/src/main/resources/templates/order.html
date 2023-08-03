@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order</title>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Price(EUR)</th>
+            <th>SKU</th>
+        </tr>
+        <tr th:each="item : ${chosenItems}">
+            <td th:text="${item.name}"></td>
+            <td th:text="${item.quantity}"></td>
+            <td th:text="${item.price.amount}"></td>
+            <td th:text="${item.sku}"></td>
+        </tr>
+    </table>
+    <form th:action="@{/create-order}" th:object="${shipping}" method="post">
+        <input type="text" th:field="*{phoneNumber}" placeholder="Phone Number">
+        <br />
+        <input type="text" th:field="*{countryCode}" placeholder="CountryCode">
+        <br />
+        <input type="text" th:field="*{name}" placeholder="Name">
+        <br />
+        <input type="text" th:field="*{postCode}" placeholder="Post Code">
+        <br />
+        <input type="text" th:field="*{suburb}" placeholder="Suburb">
+        <br />
+        <input type="text" th:field="*{line1}" placeholder="Via">
+        <br />
+        <input type="submit" th:value="Order">
+
+    </form>
+
+    <a th:href="@{/choose-more-item}">Choose more item</a>
+</body>
+
+</html>

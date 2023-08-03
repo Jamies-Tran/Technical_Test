@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Items</title>
+</head>
+
+<style>
+    table,
+    th,
+    td {
+        border: 1px solid black;
+
+        height: 50px;
+    }
+
+    div {
+        margin: 0, 50%, 0, 0;
+        width: 100%;
+    }
+
+    th {
+        width: 35%;
+        align-content: center;
+    }
+
+    td {
+        width: 35%;
+        text-align: center;
+    }
+
+    h1 {
+        margin: 0 50% 0 5%;
+        text-align: center;
+        width: 100%;
+    }
+
+    .add-to-cart {
+        background-color: white;
+        border: none;
+    }
+</style>
+
+<body>
+
+    <h1>CHOOSE ITEMS</h1>
+    <!-- <form th:action="@{/select-item}" th:object="${itemListName}" method="post">
+        <div>
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price($)</th>
+                        <th>Category</th>
+                        <th>Quantity</th>
+                    </tr>
+                    <tr th:each="item : ${items}">
+                        <td><input type="checkbox" th:field="*{names}" th:value="${item.name}" th:text="${item.name}">
+                        </td>
+                        <td th:text="${item.price.amount}"></td>
+                        <td th:text="${item.category}"></td>
+                        <td><input type="checkbox" th:value="${item.name}" /></td>
+                    </tr>
+                </tbody>
+            </table>
+            <input type="submit" value="Next" />
+        </div>
+    </form> -->
+    <table>
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <th>Price($)</th>
+                <th>Category</th>
+                <th>Quantity</th>
+            </tr>
+            <tr th:each="item : ${items}">
+                <form th:action="@{/select-item/{itemName} (itemName = ${item.name})}" method="post">
+                    <td><input class="add-to-cart" type="submit" th:value="${item.name}">
+                    </td>
+                    <td th:text="${item.price.amount}"></td>
+                    <td th:text="${item.category}"></td>
+                    <td><input type="checkbox" th:value="${item.name}" /></td>
+                </form>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

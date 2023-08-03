@@ -1,5 +1,6 @@
 package com.example.assignment.Dtos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Item {
@@ -7,15 +8,17 @@ public class Item {
     private ItemPrice price;
     private String name;
     private String category;
-    private List<String> subcategory;
+    private List<String> subcategory = new ArrayList<>();
     private String sku;
 
-    public Item(int quantity, ItemPrice price, String name, String category, List<String> subcategory, String sku) {
+    public Item() {
+    }
+
+    public Item(int quantity, ItemPrice price, String name, String category, String sku) {
         this.quantity = quantity;
         this.price = price;
         this.name = name;
         this.category = category;
-        this.subcategory = subcategory;
         this.sku = sku;
     }
 

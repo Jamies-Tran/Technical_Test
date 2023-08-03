@@ -1,22 +1,26 @@
 package com.example.assignment.Dtos;
 
 public class Consumer {
-    private String givenName;
+
+    private String givenNames;
     private String surname;
     private String email;
 
-    public Consumer(String givenName, String surname, String email) {
-        this.givenName = givenName;
+    public Consumer() {
+    }
+
+    public Consumer(String givenNames, String surname, String email) {
+        this.givenNames = givenNames;
         this.surname = surname;
         this.email = email;
     }
 
-    public String getGivenName() {
-        return givenName;
+    public String getGivenNames() {
+        return givenNames;
     }
 
-    public void setGivenName(String givenName) {
-        this.givenName = givenName;
+    public void setGivenNames(String givenNames) {
+        this.givenNames = givenNames;
     }
 
     public String getSurname() {

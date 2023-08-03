@@ -9,6 +9,9 @@ public class OrderRequest {
     private List<Item> items;
     private Merchant merchant;
 
+    public OrderRequest() {
+    }
+
     public OrderRequest(TotalAmount totalAmount, Consumer consumer, Shipping shipping, List<Item> items,
             Merchant merchant) {
         this.totalAmount = totalAmount;

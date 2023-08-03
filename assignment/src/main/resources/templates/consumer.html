@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Consumer</title>
+</head>
+
+<style>
+    div {
+        margin: 0 50% 0 35%;
+        width: 50%;
+        padding: 10px;
+    }
+
+    /* input {
+        width: 50%;
+        height: 30px;
+    } */
+
+    .consumerField {
+        width: 50%;
+        height: 30px;
+    }
+
+    .next {
+        width: 25%;
+        padding: 10px;
+    }
+
+    h1 {
+        margin: 0 20% 0 30%;
+
+    }
+</style>
+
+<body>
+
+    <h1>ENTER YOUR INFORMATION</h1>
+
+
+    <br />
+    <form th:action="@{/consumer}" th:object="${consumer}" method="post">
+        <div>
+            <input class="consumerField" type="text" placeholder="givenNames" th:field="*{givenNames}" /><br /><br />
+            <input class="consumerField" type="text" placeholder="surname" th:field="*{surname}" /><br /><br />
+            <input class="consumerField" type="text" placeholder="email" th:field="*{email}" /><br /><br />
+            <input class="next" type="submit" value="Next" />
+        </div>
+    </form>
+
+
+</body>
+
+</html>

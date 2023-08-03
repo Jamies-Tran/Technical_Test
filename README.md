@@ -1,1 +1,13 @@
 # Technical_Test
+IDE:
+  - Visual Studio Code (Version 1.80.2)
+  - Extensions:
+    + Spring Initializr Java Support (Publisher Microsoft)
+    + Spring Boot Dashboard (Publisher Microsoft)
+    + Spring Boot Tools (Publisher VMware)
+    + Spring Boot Extension Pack (Publisher VMware)
+    + thymeleaf (Publisher Juha Hinkula)
+
+Technology:
+  - Front-End: Thymeleaf (Version 3.1.2)
+  - Back-End: Spring Boot (Version 3.1.2) (JDK 17)

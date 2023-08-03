@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.assignment.Dtos.Consumer;
+import com.example.assignment.Util.ErrorHandlerUtil;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -21,6 +22,11 @@ public class ConsumerController {
 
     @PostMapping("/consumer")
     public String inputConsumerInfo(Model model, HttpSession session, @ModelAttribute Consumer consumer) {
+        String errorMsg = ErrorHandlerUtil.consumerErrString(consumer);
+        if (errorMsg != null) {
+            model.addAttribute("errorMsg", errorMsg);
+            return "consumer";
+        }
 
         session.setAttribute("consumer", consumer);
 

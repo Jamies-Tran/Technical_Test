@@ -42,6 +42,10 @@
         margin: 0 20% 0 35%;
 
     }
+
+    .error {
+        color: red;
+    }
 </style>
 
 <body>
@@ -61,7 +65,7 @@
             <label>Email</label><br />
             <input class="consumerField" type="text" placeholder="Enter your email" th:field="*{email}" /><br /><br />
             <br />
-
+            <p class="error" th:if="${errorMsg != null}" th:text="${errorMsg}"></p>
             <input class="next" type="submit" value="Next" />
         </div>
     </form>

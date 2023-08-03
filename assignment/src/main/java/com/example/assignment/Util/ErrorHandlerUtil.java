@@ -2,6 +2,7 @@ package com.example.assignment.Util;
 
 import org.springframework.util.StringUtils;
 
+import com.example.assignment.Dtos.Consumer;
 import com.example.assignment.Dtos.Shipping;
 
 public class ErrorHandlerUtil {
@@ -23,6 +24,15 @@ public class ErrorHandlerUtil {
 
         if (shipping.getCountryCode().length() > 2) {
             return "Invalid country code";
+        }
+        return null;
+    }
+
+    public static String consumerErrString(Consumer consumer) {
+        if (!StringUtils.hasLength(consumer.getGivenNames()) || consumer.getGivenNames() == "") {
+            return "Enter your first name";
+        } else if (!StringUtils.hasLength(consumer.getSurname()) || consumer.getSurname() == "") {
+            return "Enter your surname";
         }
         return null;
     }

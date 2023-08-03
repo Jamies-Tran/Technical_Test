@@ -2,6 +2,10 @@
 Branch: 
  - assignment-be
 
+Environment:
+ - Window/Linux
+ - JDK 17
+
 IDE:
   - Visual Studio Code (Version 1.80.2)
   - Extensions:
@@ -13,7 +17,7 @@ IDE:
 
 Technology:
   - Front-End: Thymeleaf (Version 3.1.2)
-  - Back-End: Spring Boot (Version 3.1.2) (JDK 17)
+  - Back-End: Spring Boot (Version 3.1.2)
     
 Run Application:
   - Three ways:

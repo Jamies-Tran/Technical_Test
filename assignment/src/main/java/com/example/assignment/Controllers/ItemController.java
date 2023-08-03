@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.assignment.Dtos.Consumer;
 import com.example.assignment.Dtos.Item;
 import com.example.assignment.Dtos.ItemListName;
 import com.example.assignment.repositories.ItemRespository;
@@ -21,8 +22,10 @@ public class ItemController {
     private ItemRespository itemRepo;
 
     @GetMapping("/item")
-    public String directItemSelection(Model model, @ModelAttribute ItemListName itemName) {
+    public String directItemSelection(Model model, HttpSession session, @ModelAttribute ItemListName itemName) {
+        Consumer consumer = (Consumer) session.getAttribute("consumer");
         model.addAttribute("items", itemRepo.getAll());
+        model.addAttribute("consumer", consumer);
 
         return "item";
     }

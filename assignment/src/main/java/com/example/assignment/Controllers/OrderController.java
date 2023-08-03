@@ -17,6 +17,7 @@ import com.example.assignment.Dtos.OrderResponse;
 import com.example.assignment.Dtos.Shipping;
 import com.example.assignment.Dtos.TotalAmount;
 import com.example.assignment.Services.OrderService;
+import com.example.assignment.Util.ErrorHandlerUtil;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -33,7 +34,7 @@ public class OrderController {
 
         if (session.getAttribute("items") != null) {
             chosenItems.addAll((List<Item>) session.getAttribute("items"));
-            model.addAttribute("chosenItems", chosenItems);
+
         }
 
         chosenItems.add(item);
@@ -60,10 +61,9 @@ public class OrderController {
 
     @GetMapping("/choose-more-item")
     public String chooseMoreItem(Model model, HttpSession session) {
-        List<Item> items = new ArrayList<>();
-        Item item = (Item) session.getAttribute("item");
-        items.add(item);
-        session.setAttribute("items", items);
+        OrderRequest orderRequest = (OrderRequest) session.getAttribute("orderRequest");
+
+        session.setAttribute("items", orderRequest.getItems());
 
         return "redirect:/item";
     }
@@ -71,6 +71,15 @@ public class OrderController {
     @PostMapping("/create-order")
     public String createOrder(Model model, HttpSession session, @ModelAttribute Shipping shipping) {
         OrderRequest orderRequest = (OrderRequest) session.getAttribute("orderRequest");
+        String errorStr = ErrorHandlerUtil.shippingErrString(shipping);
+
+        if (errorStr != null) {
+            model.addAttribute("errorStr", errorStr);
+            model.addAttribute("totalAmount", orderRequest.getTotalAmount());
+            model.addAttribute("chosenItems", orderRequest.getItems());
+            return "order";
+        }
+
         orderRequest.setShipping(shipping);
         OrderResponse orderResponse = orderService.createOrder(orderRequest);
         session.setAttribute("orderResponse", orderResponse);

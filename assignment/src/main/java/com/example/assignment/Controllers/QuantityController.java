@@ -42,6 +42,9 @@ public class QuantityController {
     public String specifyQuantity(Model model, HttpSession session, @PathVariable String itemName,
             @ModelAttribute ItemQuantity itemQuantity) {
         Item item = itemRepo.findItemByName(itemName);
+        if (itemQuantity.getQuantity() == null) {
+            itemQuantity.setQuantity(1);
+        }
         item.setQuantity(itemQuantity.getQuantity());
 
         session.setAttribute("item", item);

@@ -7,7 +7,74 @@
     <title>Order</title>
 </head>
 
+<style>
+    table,
+    th,
+    td {
+        border: 1px solid black;
+        /* margin: 20px 5% 0px 30%; */
+
+        height: 50px;
+    }
+
+    table {
+        margin-top: 20px;
+        margin-left: 20%;
+        margin-right: 15%;
+    }
+
+    th {
+        width: 35%;
+        align-content: center;
+    }
+
+    td {
+        width: 35%;
+        text-align: center;
+    }
+
+    h1 {
+        margin: 0 40% 0 5%;
+        text-align: center;
+        width: 100%;
+    }
+
+    .total {
+        margin-top: 20px;
+        margin-left: 20%;
+        margin-right: 15%;
+    }
+
+    .shipping {
+        margin-top: 20px;
+        margin-left: 45%;
+        margin-right: 15%;
+
+    }
+
+    .shippingField {
+        width: 50%;
+        height: 30px;
+    }
+
+    .order {
+        width: 45%;
+        height: 50px;
+        padding: 10px;
+        margin-top: 20px;
+        margin-left: 21px;
+        border: none;
+        color: white;
+        background-color: green;
+    }
+
+    .error {
+        color: red;
+    }
+</style>
+
 <body>
+    <h1>Overview Your Order</h1>
     <table>
         <tr>
             <th>Name</th>
@@ -22,21 +89,37 @@
             <td th:text="${item.sku}"></td>
         </tr>
     </table>
+    <div class="total">
+        <h2><strong>Total: </strong><span th:text="${totalAmount.amount}"></span><span> </span><span
+                th:text="${totalAmount.currency}"></span></h2>
+    </div>
+    <br /><br />
+    <h1>Shipping Information</h1>
     <form th:action="@{/create-order}" th:object="${shipping}" method="post">
-        <input type="text" th:field="*{phoneNumber}" placeholder="Phone Number">
-        <br />
-        <input type="text" th:field="*{countryCode}" placeholder="CountryCode">
-        <br />
-        <input type="text" th:field="*{name}" placeholder="Name">
-        <br />
-        <input type="text" th:field="*{postCode}" placeholder="Post Code">
-        <br />
-        <input type="text" th:field="*{suburb}" placeholder="Suburb">
-        <br />
-        <input type="text" th:field="*{line1}" placeholder="Via">
-        <br />
-        <input type="submit" th:value="Order">
+        <div class="shipping">
+            <label>Phone Number</label><br />
+            <input class="shippingField" type="text" th:field="*{phoneNumber}" placeholder="Phone Number">
 
+            <br /><br />
+            <label>Country Code</label><br />
+            <input class="shippingField" type="text" th:field="*{countryCode}" placeholder="Country Code">
+            <br /><br />
+            <label>Receiver Name</label><br />
+            <input class="shippingField" type="text" th:field="*{name}" placeholder="Name">
+            <br /><br />
+            <label>Postal Code</label><br />
+            <input class="shippingField" type="text" th:field="*{postCode}" placeholder="Post Code">
+            <br /><br />
+            <label>Suburb</label><br />
+            <input class="shippingField" type="text" th:field="*{suburb}" placeholder="Suburb">
+            <br /><br />
+            <label>Receiver Address</label><br />
+            <input class="shippingField" type="text" th:field="*{line1}" placeholder="Address">
+            <br /><br />
+            <p class="error" th:if="${errorStr != null}" th:text="${errorStr}"></p>
+            <br />
+            <input class="order" type="submit" th:value="Order">
+        </div>
     </form>
 
     <a th:href="@{/choose-more-item}">Choose more item</a>

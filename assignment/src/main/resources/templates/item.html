@@ -32,6 +32,12 @@
     }
 
     h1 {
+        margin: 0 40% 0 5%;
+        text-align: center;
+        width: 100%;
+    }
+
+    h2 {
         margin: 0 50% 0 5%;
         text-align: center;
         width: 100%;
@@ -39,50 +45,34 @@
 
     .add-to-cart {
         background-color: white;
+        color: green;
+        text-decoration: underline;
         border: none;
     }
 </style>
 
 <body>
+    <h1>Welcome, <p th:text="${#strings.toUpperCase(consumer.givenNames)}"></p>
+    </h1>
+    <h2>CHOOSE YOUR ITEM</h2>
 
-    <h1>CHOOSE ITEMS</h1>
-    <!-- <form th:action="@{/select-item}" th:object="${itemListName}" method="post">
-        <div>
-            <table>
-                <tbody>
-                    <tr>
-                        <th>Name</th>
-                        <th>Price($)</th>
-                        <th>Category</th>
-                        <th>Quantity</th>
-                    </tr>
-                    <tr th:each="item : ${items}">
-                        <td><input type="checkbox" th:field="*{names}" th:value="${item.name}" th:text="${item.name}">
-                        </td>
-                        <td th:text="${item.price.amount}"></td>
-                        <td th:text="${item.category}"></td>
-                        <td><input type="checkbox" th:value="${item.name}" /></td>
-                    </tr>
-                </tbody>
-            </table>
-            <input type="submit" value="Next" />
-        </div>
-    </form> -->
     <table>
         <tbody>
             <tr>
                 <th>Name</th>
-                <th>Price($)</th>
+                <th>Price</th>
                 <th>Category</th>
-                <th>Quantity</th>
+                <th>Cur.</th>
             </tr>
             <tr th:each="item : ${items}">
                 <form th:action="@{/select-item/{itemName} (itemName = ${item.name})}" method="post">
                     <td><input class="add-to-cart" type="submit" th:value="${item.name}">
                     </td>
-                    <td th:text="${item.price.amount}"></td>
+                    <td th:text="${item.price.amount}">
+
+                    </td>
                     <td th:text="${item.category}"></td>
-                    <td><input type="checkbox" th:value="${item.name}" /></td>
+                    <td th:text="${item.price.currency}"></td>
                 </form>
             </tr>
         </tbody>

@@ -7,22 +7,54 @@
     <title>Quantity</title>
 </head>
 
+<style>
+    table,
+    th,
+    td {
+        border: 1px solid black;
+        margin: 20px 5% 0px 30%;
+        height: 50px;
+    }
+
+    div {
+        margin: 0, 50%, 0, 0;
+        width: 100%;
+    }
+
+    th {
+        width: 35%;
+        align-content: center;
+    }
+
+    td {
+        width: 35%;
+        text-align: center;
+    }
+
+    h1 {
+        margin: 0 40% 0 5%;
+        text-align: center;
+        width: 100%;
+    }
+</style>
+
+
+
 <body>
+    <h1>Quantity</h1>
     <table>
         <tr>
-            <th>Name</th>
-            <th>Price(EUR)</th>
-            <th>Category</th>
+            <th>Item</th>
+
             <th>Quantity</th>
         </tr>
         <tr>
             <form th:action="@{/specify-quantity/{itemName} (itemName = ${item.name})}" th:object="${itemQuantity}"
                 method="post">
                 <td th:text="${item.name}"></td>
-                <td th:text="${item.price.amount}"></td>
-                <td th:text="${item.category}"></td>
-                <td><input type="number" th:field="*{quantity}"></td>
-                <td><input type="submit" th:value="Next"></td>
+
+                <td><input id="quantity" type="number" th:field="*{quantity}"><input type="submit" th:value="Next"></td>
+
             </form>
         </tr>
     </table>
